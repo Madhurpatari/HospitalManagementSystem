@@ -49,4 +49,25 @@ public class ApiController {
             return ResponseEntity.ok(suggestedDoctors);
         }
     }
+
+    @DeleteMapping("/doctor/{doctorId}")
+    public ResponseEntity<String> deleteDoctor(@PathVariable Long doctorId) {
+        if(doctorRepository.existsById(doctorId)){
+            doctorRepository.deleteById(doctorId);
+            return ResponseEntity.ok("Doctor deleted successfully");
+        }else{
+            return new ResponseEntity<>("Doctor not found" , HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @DeleteMapping("/patient/{patientId}")
+    public ResponseEntity<String> deletePatient(@PathVariable Long patientId) {
+        if(patientRepository.existsById(patientId)){
+            patientRepository.deleteById(patientId);
+            return ResponseEntity.ok("Patient deleted successfully");
+        }else{
+            return new ResponseEntity<>("Patient not found" , HttpStatus.NOT_FOUND);
+        }
+    }
 }
